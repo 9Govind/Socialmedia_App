@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %} Home  {% endblock title %}
+{% block body %}
+ {% include "messages.html" %}
+<h1 class="text-center"> Posts</h1>
+<br>
+
+ <section id="details" class="details section">
+      <div class="container">
+       {% for d in data %}
+        
+       
+        <div class="row gy-4 align-items-center features-item">
+          <div class="col-md-5 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="100">
+            <img src="{{url_for('static',filename='uploads/' + d.image)}}" class="img-fluid" alt="">
+          </div>
+          <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
+            <h3>{{d.title}}</h3>
+            <p class="fst-italic">
+            {{d.description}}
+            </p>
+            <ul>
+              <li><i class="bi bi-check">Uploaded by: {{current_user.first_name}}</i></li>
+              <li><i class="bi bi-check">Uploaded on: {{d.date}}</i></li>
+              <li><i class="bi bi-check">Uploaded time: {{d.time}}</i></li>
+              <a href="/like/{{d.post_id}}"><li><h5><i class="fa-regular fa-heart fa-beat fa-2xl"></i>Like</h5></li></a>
+              <li><i class="fa-regular fa-thumbs-up fa-beat fa-2xl"></i>Liked by{{d.likes}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <a href="/viewcomment/{{d.post_id}}"><i class="fa-solid fa-eye fa-fade fa-2xl"></i>View comments</a></li>
+            </ul>
+            <hr>
+           <form action="/comment/{{d.post_id}}" method="post">
+            <input type="hidden" name="commented" value="{{current_user.first_name}} {{current_user.last_name}}">
+            <label for="comment">Add Your Comments</label>
+            <textarea name="comment" class="form-control mt-3 mb-3" required></textarea>
+            <button class="btn btn-primary"> Add Comment</button>
+
+           </form>  
+          </div>
+         
+      </div>
+     {% endfor %} 
+    </section><!-- /Details Section -->
+ 
+{% endblock body %}

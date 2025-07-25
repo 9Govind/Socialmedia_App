@@ -1,0 +1,12 @@
+
+virtualenv myenv
+
+myenv\scripts\activat
+pip install flask
+pip install -U Flask-SQLAlchemy
+pip install mysqlclient
+pip install Flask-Login
+
+
+directory = cd .\socialmedia or(directory Name)
+#run file = flask --app app run --debug
